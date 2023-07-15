@@ -1,90 +1,163 @@
+// BFS algorithm in C
+
 #include <stdio.h>
 #include <stdlib.h>
+#define SIZE 40
 
-#define MAX_VERTICES 100
-
-enum Color { WHITE, GRAY, BLACK };
-
-struct Node {
-    int vertex;
-    struct Node* next;
+struct queue {
+  int items[SIZE];
+  int front;
+  int rear;
 };
+
+struct queue* createQueue();
+void enqueue(struct queue* q, int);
+int dequeue(struct queue* q);
+void display(struct queue* q);
+int isEmpty(struct queue* q);
+void printQueue(struct queue* q);
+
+struct node {
+  int vertex;
+  struct node* next;
+};
+
+struct node* createNode(int);
 
 struct Graph {
-    struct Node* adjList[MAX_VERTICES];
+  int numVertices;
+  struct node** adjLists;
+  int* visited;
 };
 
-void enqueue(int* queue, int* rear, int item) {
-    queue[++(*rear)] = item;
+// BFS algorithm
+void bfs(struct Graph* graph, int startVertex) {
+  struct queue* q = createQueue();
+
+  graph->visited[startVertex] = 1;
+  enqueue(q, startVertex);
+
+  while (!isEmpty(q)) {
+    printQueue(q);
+    int currentVertex = dequeue(q);
+    printf("Visited %d\n", currentVertex);
+
+    struct node* temp = graph->adjLists[currentVertex];
+
+    while (temp) {
+      int adjVertex = temp->vertex;
+
+      if (graph->visited[adjVertex] == 0) {
+        graph->visited[adjVertex] = 1;
+        enqueue(q, adjVertex);
+      }
+      temp = temp->next;
+    }
+  }
 }
 
-int dequeue(int* queue, int* front) {
-    return queue[++(*front)];
+// Creating a node
+struct node* createNode(int v) {
+  struct node* newNode = malloc(sizeof(struct node));
+  newNode->vertex = v;
+  newNode->next = NULL;
+  return newNode;
 }
 
-void BFS(struct Graph* graph, int source) {
-    enum Color color[MAX_VERTICES];
-    int distance[MAX_VERTICES];
-    int predecessor[MAX_VERTICES];
-    int queue[MAX_VERTICES];
-    int front = -1, rear = -1;
+// Creating a graph
+struct Graph* createGraph(int vertices) {
+  struct Graph* graph = malloc(sizeof(struct Graph));
+  graph->numVertices = vertices;
 
-    for (int u = 0; u < MAX_VERTICES; u++) {
-        if (u != source) {
-            color[u] = WHITE;
-            distance[u] = -1;
-            predecessor[u] = -1;
-        }
-    }
+  graph->adjLists = malloc(vertices * sizeof(struct node*));
+  graph->visited = malloc(vertices * sizeof(int));
 
-    color[source] = GRAY;
-    distance[source] = 0;
-    predecessor[source] = -1;
-    enqueue(queue, &rear, source);
+  int i;
+  for (i = 0; i < vertices; i++) {
+    graph->adjLists[i] = NULL;
+    graph->visited[i] = 0;
+  }
 
-    while (front != rear) {
-        int u = dequeue(queue, &front);
-        struct Node* temp = graph->adjList[u];
-
-        while (temp != NULL) {
-            int v = temp->vertex;
-
-            if (color[v] == WHITE) {
-                color[v] = GRAY;
-                distance[v] = distance[u] + 1;
-                predecessor[v] = u;
-                enqueue(queue, &rear, v);
-            }
-
-            temp = temp->next;
-        }
-
-        color[u] = BLACK;
-    }
-
-    // Print the results
-    printf("Vertex\tDistance\tPredecessor\n");
-    for (int v = 0; v < MAX_VERTICES; v++) {
-        printf("%d\t%d\t\t%d\n", v, distance[v], predecessor[v]);
-    }
+  return graph;
 }
 
-int main() {
-    struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+// Add edge
+void addEdge(struct Graph* graph, int src, int dest) {
+  // Add edge from src to dest
+  struct node* newNode = createNode(dest);
+  newNode->next = graph->adjLists[src];
+  graph->adjLists[src] = newNode;
 
-    // Initialize the adjacency list
-    for (int i = 0; i < MAX_VERTICES; i++) {
-        graph->adjList[i] = NULL;
-    }
+  // Add edge from dest to src
+  newNode = createNode(src);
+  newNode->next = graph->adjLists[dest];
+  graph->adjLists[dest] = newNode;
+}
 
-    // TODO: Build the graph by adding edges to the adjacency list
+// Create a queue
+struct queue* createQueue() {
+  struct queue* q = malloc(sizeof(struct queue));
+  q->front = -1;
+  q->rear = -1;
+  return q;
+}
 
-    int source;
-    printf("Enter the source vertex: ");
-    scanf("%d", &source);
-
-    // Perform BFS from the source vertex
-    BFS(graph, source);
-
+// Check if the queue is empty
+int isEmpty(struct queue* q) {
+  if (q->rear == -1)
+    return 1;
+  else
     return 0;
+}
+
+// Adding elements into queue
+void enqueue(struct queue* q, int value) {
+  if (q->rear == SIZE - 1)
+    printf("\nQueue is Full!!");
+  else {
+    if (q->front == -1)
+      q->front = 0;
+    q->rear++;
+    q->items[q->rear] = value;
+  }
+}
+
+// Removing elements from queue
+int dequeue(struct queue* q) {
+  int item;
+  if (isEmpty(q)) {
+    printf("Queue is empty");
+    item = -1;
+  } else {
+    item = q->items[q->front];
+    q->front++;
+    if (q->front > q->rear) {
+      printf("Resetting queue ");
+      q->front = q->rear = -1;
+    }
+  }
+  return item;
+}
+void printQueue(struct queue* q) {
+  int i = q->front;
+  if (isEmpty(q)) {
+    printf("Queue is empty");
+  } else {
+    printf("\nQueue contains \n");
+    for (i = q->front; i < q->rear + 1; i++) {
+      printf("%d ", q->items[i]);
+    }
+  }
+}
+int main() {
+  struct Graph* graph = createGraph(6);
+  addEdge(graph, 0, 1);
+  addEdge(graph, 0, 2);
+  addEdge(graph, 1, 2);
+  addEdge(graph, 1, 4);
+  addEdge(graph, 1, 3);
+  addEdge(graph, 2, 4);
+  addEdge(graph, 3, 4);
+  bfs(graph, 0);
+  return 0;
 }
