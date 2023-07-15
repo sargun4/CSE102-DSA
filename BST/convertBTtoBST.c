@@ -1,4 +1,3 @@
-/* convert Binary Tree to Binary Search Tree */
 #include <stdio.h>
 #include <stdlib.h>
 struct node {
@@ -6,8 +5,6 @@ struct node {
 	struct node* left;
 	struct node* right;
 };
-/* A helper function that stores inorder traversal of a tree rooted
-with node */
 void storeInorder(struct node* node, int inorder[], int* index_ptr){
 	if (node == NULL)
 		return;
@@ -43,13 +40,11 @@ void arrayToBST(int* arr, struct node* root, int* index_ptr){
 	/* finally update the right subtree */
 	arrayToBST(arr, root->right, index_ptr);
 }
-// This function converts a given Binary Tree to BST
 void binaryTreeToBST(struct node* root){
 	// base case: tree is empty
 	if (root == NULL)
 		return;
-	/* Count the number of nodes in Binary Tree so that
-	we know the size of temporary array to be created */
+	
 	int n = countNodes(root);
 	// Create a temp array arr[] and store inorder traversal of tree in arr[]
 	int* arr = (int*)malloc(sizeof(int[n])); 
@@ -63,7 +58,6 @@ void binaryTreeToBST(struct node* root){
 	// delete dynamically allocated memory to avoid memory leak
 	free(arr);
 }
-/* Utility function to create a new Binary Tree node */
 struct node* newNode(int data){
 	struct node* temp = malloc(sizeof(struct node));
 	temp->data = data;
@@ -71,7 +65,6 @@ struct node* newNode(int data){
 	temp->right = NULL;
 	return temp;
 }
-/* Utility function to print inorder traversal of Binary Tree */
 void printInorder(struct node* node){
 	if (node == NULL)
 		return;
