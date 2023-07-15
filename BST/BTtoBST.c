@@ -32,9 +32,7 @@ void inorderTraversal(struct node* root, int* arr, int* i) {
     arr[(*i)++] = root->val;
     inorderTraversal(root->right, arr, i);
 }
-// Function to convert binary tree to BST
 struct node* convertToBST(struct node* root) {
-    // Count number of nodes in binary tree
     int n = 0;
     struct node* curr = root;
     while (curr != NULL) {
