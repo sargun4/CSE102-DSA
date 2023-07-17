@@ -39,7 +39,6 @@
 // // int main() {
 // //     int N, K;
 // //     scanf("%d %d", &N, &K);
-// //     // Read the presence of soldiers in each city
 // //     for (int i = 1; i <= N; i++) {
 // //         scanf("%d", &cities[i].soldiers);
 // //         cities[i].visited = 0;
@@ -60,7 +59,7 @@
 //     struct Node* next;
 // } Node;
 
-// Node* graph[100001];  // Assuming the maximum number of cities is 100000
+// Node* graph[100001];  // max no of cities is 100000
 
 // void addEdge(int u, int v) {
 //     Node* newNode = (Node*)malloc(sizeof(Node));
@@ -73,9 +72,9 @@
 //     int conquered = 0;
 //     int consecutive = 0;
 
-//     Node* adjacent = graph[current];
-//     while (adjacent != NULL) {
-//         int nextCity = adjacent->city;
+//     Node* adj = graph[current];
+//     while (adj != NULL) {
+//         int nextCity = adj->city;
 
 //         if (consecutive + 1 <= k)
 //             consecutive++;
@@ -87,7 +86,7 @@
 
 //         conquered += dfs(nextCity, k);
 
-//         adjacent = adjacent->next;
+//         adj = adj->next;
 //     }
 
 //     return conquered;
@@ -122,7 +121,7 @@ typedef struct Node {
     struct Node* next;
 } Node;
 
-Node* graph[100001];  // Assuming the maximum number of cities is 100000
+Node* graph[100001];  // max no of cities is 100000
 
 void addEdge(int u, int v) {
     Node* newNode = (Node*)malloc(sizeof(Node));
@@ -133,10 +132,10 @@ void addEdge(int u, int v) {
 
 int dfs(int current, int k, int prevSoldiers) {
     int conquered = 0;
-    Node* adjacent = graph[current];
+    Node* adj = graph[current];
 
-    while (adjacent != NULL) {
-        int nextCity = adjacent->city;
+    while (adj != NULL) {
+        int nextCity = adj->city;
 
         if (prevSoldiers == 0 && graph[nextCity] != NULL && graph[nextCity]->next == NULL) {
             if (k > 0) {
@@ -147,7 +146,7 @@ int dfs(int current, int k, int prevSoldiers) {
             conquered += dfs(nextCity, k, graph[nextCity] == NULL || graph[nextCity]->next == NULL);
         }
 
-        adjacent = adjacent->next;
+        adj = adj->next;
     }
 
     return conquered;
