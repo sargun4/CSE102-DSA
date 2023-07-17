@@ -1,21 +1,3 @@
-
-// // Read the values of m and n.
-// // Read the pyramid layout and store it in a 2D matrix.
-// // Find Kone's initial location (marked as 'A') and store its coordinates.
-// // Create a 2D matrix to store the distance traveled to reach each cell, initialized with -1.
-// // Create a 2D matrix to store the path taken to reach each cell, initialized with empty strings.
-// // Create a queue to perform BFS.
-// // Enqueue Kone's initial location into the queue.
-// // Set the distance of Kone's initial location to 0 and the path to an empty string.
-// // While the queue is not empty:
-// // a. Dequeue a cell from the front of the queue.
-// // b. Check if the cell is a free boundary cell (on any edge of the pyramid). If yes, print "YES", the distance traveled, and the path taken, then return.
-// // c. Check all four adjacent cells (up, down, left, right):
-// // - If the adjacent cell is within the bounds of the pyramid and is a free cell ('.'), a mummy ('M'), or Kone's initial location ('A'), and the distance of the adjacent cell is -1 (not visited):
-// // - Set the distance of the adjacent cell to the current distance + 1.
-// // - Set the path of the adjacent cell to the current path + the direction of the move (U, D, L, R).
-// // - Enqueue the adjacent cell into the queue.
-// // If no free boundary cell is found, print "NO".
 // #include <stdio.h>
 // #include <stdbool.h>
 // #include <stdlib.h>
@@ -155,3 +137,21 @@
     
 //     return 0;
 // }
+
+// // Read the values of m and n.
+// // Read the pyramid layout and store it in a 2D matrix.
+// // Find Kone's initial location (marked as 'A') and store its coordinates.
+// // Create a 2D matrix to store the distance traveled to reach each cell, initialized with -1.
+// // Create a 2D matrix to store the path taken to reach each cell, initialized with empty strings.
+// // Create a queue to perform BFS.
+// // Enqueue Kone's initial location into the queue.
+// // Set the distance of Kone's initial location to 0 and the path to an empty string.
+// // While the queue is not empty:
+// // a. Dequeue a cell from the front of the queue.
+// // b. Check if the cell is a free boundary cell (on any edge of the pyramid). If yes, print "YES", the distance traveled, and the path taken, then return.
+// // c. Check all four adjacent cells (up, down, left, right):
+// // - If the adjacent cell is within the bounds of the pyramid and is a free cell ('.'), a mummy ('M'), or Kone's initial location ('A'), and the distance of the adjacent cell is -1 (not visited):
+// // - Set the distance of the adjacent cell to the current distance + 1.
+// // - Set the path of the adjacent cell to the current path + the direction of the move (U, D, L, R).
+// // - Enqueue the adjacent cell into the queue.
+// // If no free boundary cell is found, print "NO".
