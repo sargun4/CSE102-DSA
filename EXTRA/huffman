@@ -1,3 +1,21 @@
+Compress a file using Huffman codes and decompress a file
+encoded using Huffman codes. The inputs of the program are the following:
+1. The name of the input file
+2. The name of the output file
+3. Mode (0/1) : 0 for compression, 1 for decompression
+Compression Mode:
+In compression mode, the input file is the name of the file that needs to be compressed, and the
+output file is the name of the file that will be created during the compression. The input file
+contains a sequence of 8-bit characters. The output file stores the metadata for Huffman codes
+followed by the encoded sequence. The program also prints the Huffman codes for each
+character in the file in compression mode.
+Decompression mode:
+In decompression mode, the input file is the file's name that is created during the compression
+mode. The output file will be created during the decompression. The decompression algorithm
+first builds the tree containing Huffman codes using the metadata and then uses the tree to
+decode the encoded sequence in the input file. The decoded data is written to the output file
+
+
 Format of the metadata that is stored in the compressed file:
 N: no. of unique characters present in the input file
 E: a chosen EOF chatacter (In this case, the character with the ASCII Code 0)
