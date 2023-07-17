@@ -1,0 +1,21 @@
+Format of the metadata that is stored in the compressed file:
+N: no. of unique characters present in the input file
+E: a chosen EOF chatacter (In this case, the character with the ASCII Code 0)
+ascii(x): the ASCII code of character x
+huffmanCode(x): the Huffman Code generated for character x.
+Then, the generated compressed file contains metadata for the encoding in the following format (for the ease of access):
+
+Line #1:     <N+1>
+Line #2:     <ascii(character-1)> <huffmanCode(character-1)>
+Line #3:     <ascii(character-2)> <huffmanCode(character-2)>
+...          ...
+Line #(N+1): <ascii(character-N)> <huffmanCode(character-N)>
+Line #(N+2): <ascii(character-E)> <huffmanCode(character-E)>
+The compressed data follows this metadata format. A picture of the sample output file (generated from the sample input file) is attached below.
+For reference, the input file contained the unique characters 'a', 'b', 'c', 'd', 'e', and 'f', i.e. N = 6. The first 8 lines of the output file store the metadata.
+
+  
+Line #1: The first line contains a single value, which is N+1. N represents the no. of unique characters present in the input file, and the additional 1 is for the EOF (End-of-File) character.
+Lines #2 to #(N+1): Each line corresponds to a unique character (except the EOF character) and its corresponding Huffman code. The format of each line is "<ascii(character)> <huffmanCode(character)>". The ASCII code of the character is followed by a space and then the Huffman code assigned to that character.
+Line #(N+2): The last line of the metadata corresponds to the EOF character. It follows the same format as the previous lines ("<ascii(character-E)> <huffmanCode(character-E)>"), where character-E represents the EOF character.
+In summary, the metadata provides a mapping between the ASCII codes of the characters and their corresponding Huffman codes, allowing for proper decoding of the compressed data.
