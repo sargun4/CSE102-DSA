@@ -1,12 +1,9 @@
-// C++ program to find largest rectangle with all 1s in a binary matrix
+ 
 #include <bits/stdc++.h>
-using namespace std;
-// Rows and columns in input matrix
+using namespace std; 
 #define R 4
 #define C 4
-
 // Finds the maximum area under the histogram represented by histogram.  
-
 int maxHist(int row[]){
 	// Create an empty stack.
 	// The stack holds indexes of
