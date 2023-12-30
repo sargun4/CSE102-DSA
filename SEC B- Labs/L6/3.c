@@ -112,17 +112,10 @@ int main() {
 
 
 // The visited array is used to mark a course as visited when it is first encountered during the DFS traversal. This helps in preventing infinite loops and ensures that each course is visited only once.
-
 // The onStack array is used to detect cycles in the g. It keeps track of the courses that are currently in the call stack. If a course is encountered during the DFS traversal and it is already present in the onStack array, it means that there is a cycle in the g.
 
-// Here's an explanation of how the arrays are used in the has_cycle_DFS function:
-
 // When a course course is visited for the first time, it is marked as visited by setting visited[course] to 1.
-
 // Then, course is added to the onStack array by setting onStack[course] to 1.
-
 // The function recursively visits the prerequisites of course and checks if any of them are already visited or present in the onStack array. If a prereq is visited and also on the stack, it indicates a cycle in the g, and the function returns 1 to indicate the presence of a cycle.
-
 // After visiting all the prerequisites of course, course is removed from the onStack array by setting onStack[course] to 0.
-
 // Finally, if no cycle is detected during the DFS traversal, the function returns 0 to indicate the absence of a cycle.
