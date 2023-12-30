@@ -1,12 +1,6 @@
-// 1 CORRECT-
+ 
 #include <stdio.h>
-// The code then initializes a variable max_perimeter to zero, which will store the maximum 
-// perimeter of a rectangular table that can be placed in the hall.
-// The code then iterates over each cell of the hall matrix again, and for each cell (i, j)
-//  that is free, it computes the minimum side length min_side of the rectangular table that can be placed with one of its sides starting at (i, j) using the dp array. Then, it iterates over all cells (k, j) below (i, j) that are also free, and for each such cell, it updates min_side to the minimum of min_side and dp[k][j], and computes the perimeter of the corresponding rectangular table as 2 * (min_side + k - i + 1). Finally, 
-// it updates max_perimeter to the maximum of max_perimeter and the perimeter computed for the
-//  current cell. The code prints max_perimeter-1, which is the maximum number of friends that can sit around a rectangular
-//  table of maximum perimeter.
+ 
 
 int min(int a, int b) {
     return a < b ? a : b;
